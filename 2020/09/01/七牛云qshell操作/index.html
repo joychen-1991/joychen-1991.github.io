@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>七牛云qshell操作 | Joy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="下载qshell工具，传到服务器上   添加认证，在七牛云密钥管理中打开qshell account AK SK NAME (NAME 自定义即可)   进入.qshell，添加批量上传目录配文件vim upload.json  123456&amp;#123;    &quot;src_dir&quot; : &quot;&#x2F;root&#x2F;upweb&quot;,    &quot;bu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="七牛云qshell操作">
+<meta property="og:url" content="https://joychen-1991.github.io/2020/09/01/%E4%B8%83%E7%89%9B%E4%BA%91qshell%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Joy">
+<meta property="og:description" content="下载qshell工具，传到服务器上   添加认证，在七牛云密钥管理中打开qshell account AK SK NAME (NAME 自定义即可)   进入.qshell，添加批量上传目录配文件vim upload.json  123456&amp;#123;    &quot;src_dir&quot; : &quot;&#x2F;root&#x2F;upweb&quot;,    &quot;bu">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-01T06:59:54.000Z">
+<meta property="article:modified_time" content="2020-09-01T09:26:32.896Z">
+<meta property="article:author" content="Joy">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Joy" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Joy</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://joychen-1991.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-七牛云qshell操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/01/%E4%B8%83%E7%89%9B%E4%BA%91qshell%E6%93%8D%E4%BD%9C/" class="article-date">
+  <time datetime="2020-09-01T06:59:54.000Z" itemprop="datePublished">2020-09-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      七牛云qshell操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>下载qshell工具，传到服务器上  </li>
+<li>添加认证，在七牛云密钥管理中打开<br>qshell account AK SK NAME (NAME 自定义即可)  </li>
+<li>进入.qshell，添加批量上传目录配文件<br>vim upload.json  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;src_dir&quot; : &quot;&#x2F;root&#x2F;upweb&quot;,</span><br><span class="line">    &quot;bucket&quot; : &quot;syhdoctor2020-staging&quot;,</span><br><span class="line">    &quot;rescan_local&quot; : true,</span><br><span class="line">    &quot;overwrite&quot; : true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+rescan_local:扫描新增文件，且上传，默认新增不上传<br>overwrite:覆盖文件，如有修改  </li>
+<li>批量上传命令<br>/opt/qshell qupload upload.json  </li>
+<li>列出bucket文件列表<br>/opt/qshell listbucket syhdoctor2020-staging &gt; del.txt  </li>
+<li>批量删除文件<br>/opt/qshell batchdelete syhdoctor2020-staging -i del.txt  </li>
+<li>更详细的文档访问<br><a target="_blank" rel="noopener" href="https://developer.qiniu.com/kodo/tools/1302/qshell">https://developer.qiniu.com/kodo/tools/1302/qshell</a>  </li>
+<li>添加CDN刷新的目录列表<br>vim url.txt<br><a target="_blank" rel="noopener" href="https://patest.syhdoctor.com/web/syhdoctor">https://patest.syhdoctor.com/web/syhdoctor</a></li>
+<li>刷新目录<br>/opt/qshell cdnrefresh –dirs -i url.txt</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joychen-1991.github.io/2020/09/01/%E4%B8%83%E7%89%9B%E4%BA%91qshell%E6%93%8D%E4%BD%9C/" data-id="ckemd2jsv000018vbf53agln5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/09/02/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/01/Docker%E9%95%9C%E5%83%8F%E6%93%8D%E4%BD%9C/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Docker离线环境部署以及镜像导入</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/01/%E4%B8%83%E7%89%9B%E4%BA%91qshell%E6%93%8D%E4%BD%9C/">七牛云qshell操作</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/01/Docker%E9%95%9C%E5%83%8F%E6%93%8D%E4%BD%9C/">Docker离线环境部署以及镜像导入</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Joy<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
