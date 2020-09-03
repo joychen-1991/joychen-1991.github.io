@@ -1,220 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
-  
-  <title>Docker离线环境部署以及镜像导入 | Joy</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="下载docker源码包https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;static&#x2F;stable&#x2F;x86_64&#x2F;   解压tar -zxf docker-19.03.8.tgz   将解压文件复制到&#x2F;usr&#x2F;bincp docker&#x2F;* &#x2F;usr&#x2F;bin   设置启动服务vim &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;docker.service  1234567891011">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Docker离线环境部署以及镜像导入">
-<meta property="og:url" content="https://joychen-1991.github.io/2020/09/01/Docker%E9%95%9C%E5%83%8F%E6%93%8D%E4%BD%9C/index.html">
-<meta property="og:site_name" content="Joy">
-<meta property="og:description" content="下载docker源码包https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;static&#x2F;stable&#x2F;x86_64&#x2F;   解压tar -zxf docker-19.03.8.tgz   将解压文件复制到&#x2F;usr&#x2F;bincp docker&#x2F;* &#x2F;usr&#x2F;bin   设置启动服务vim &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;docker.service  1234567891011">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-01T06:59:52.000Z">
-<meta property="article:modified_time" content="2020-09-01T09:23:17.217Z">
-<meta property="article:author" content="Joy">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Joy" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 5.1.1"></head>
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Joy</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://joychen-1991.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-Docker镜像操作" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/09/01/Docker%E9%95%9C%E5%83%8F%E6%93%8D%E4%BD%9C/" class="article-date">
-  <time datetime="2020-09-01T06:59:52.000Z" itemprop="datePublished">2020-09-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Docker离线环境部署以及镜像导入
-    </h1>
-  
+{% block page_class %}page-post-detail{% endblock %}
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>下载docker源码包<br><a target="_blank" rel="noopener" href="https://download.docker.com/linux/static/stable/x86_64/">https://download.docker.com/linux/static/stable/x86_64/</a>  </li>
-<li>解压<br>tar -zxf docker-19.03.8.tgz  </li>
-<li>将解压文件复制到/usr/bin<br>cp docker/* /usr/bin  </li>
-<li>设置启动服务<br>vim /etc/systemd/system/docker.service  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description&#x3D;Docker Application Container Engine</span><br><span class="line">Documentation&#x3D;https:&#x2F;&#x2F;docs.docker.com</span><br><span class="line">After&#x3D;network-online.target firewalld.service</span><br><span class="line">Wants&#x3D;network-online.target</span><br><span class="line">[Service]</span><br><span class="line">Type&#x3D;notify</span><br><span class="line"># the default is not to use systemd for cgroups because the delegate issues still</span><br><span class="line"># exists and systemd currently does not support the cgroup feature set required</span><br><span class="line"># for containers run by docker</span><br><span class="line">ExecStart&#x3D;&#x2F;opt&#x2F;software&#x2F;docker&#x2F;dockerd</span><br><span class="line">ExecReload&#x3D;&#x2F;bin&#x2F;kill -s HUP $MAINPID</span><br><span class="line"># Having non-zero Limit*s causes performance problems due to accounting overhead</span><br><span class="line"># in the kernel. We recommend using cgroups to do container-local accounting.</span><br><span class="line">LimitNOFILE&#x3D;infinity</span><br><span class="line">LimitNPROC&#x3D;infinity</span><br><span class="line">LimitCORE&#x3D;infinity</span><br><span class="line"># Uncomment TasksMax if your systemd version supports it.</span><br><span class="line"># Only systemd 226 and above support this version.</span><br><span class="line">#TasksMax&#x3D;infinity</span><br><span class="line">TimeoutStartSec&#x3D;0</span><br><span class="line"># set delegate yes so that systemd does not reset the cgroups of docker containers</span><br><span class="line">Delegate&#x3D;yes</span><br><span class="line"># kill only the docker process, not all processes in the cgroup</span><br><span class="line">KillMode&#x3D;process</span><br><span class="line"># restart the docker process if it exits prematurely</span><br><span class="line">Restart&#x3D;on-failure</span><br><span class="line">StartLimitBurst&#x3D;3</span><br><span class="line">StartLimitInterval&#x3D;60s</span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.targe</span><br></pre></td></tr></table></figure></li>
-<li>增加权限<br>chmod +x /etc/systemd/system/docker.service  </li>
-<li>启动项生效<br>systemctl daemon-reload  </li>
-<li>从其他可以连接网络的服务器上导出镜像<br>docker save -o java.tar java  </li>
-<li>通过工具上传到离线服务器，然后导入<br>docker load -i java.tar  </li>
-<li>运行一个jar包程序实例<br>docker run -d –name doctor -v /opt/logs:/logs -v /opt/syh.jar:/opt/syh.jar java java -jar /opt/syh.jar –spring.profiles.active=dev</li>
-</ul>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joychen-1991.github.io/2020/09/01/Docker%E9%95%9C%E5%83%8F%E6%93%8D%E4%BD%9C/" data-id="ckemd2jt2000118vbdo0ih4a2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2020/09/01/%E4%B8%83%E7%89%9B%E4%BA%91qshell%E6%93%8D%E4%BD%9C/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          七牛云qshell操作
-        
-      </div>
-    </a>
-  
-  
-</nav>
+{% block content %}
 
-  
-</article>
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li></ul>
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
   </div>
 
+{% endblock %}
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/09/03/%E4%BB%8ELVM%E5%88%A0%E9%99%A4%E7%A3%81%E7%9B%98/">从LVM删除磁盘</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/02/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/01/%E4%B8%83%E7%89%9B%E4%BA%91qshell%E6%93%8D%E4%BD%9C/">七牛云qshell操作</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/01/Docker%E9%95%9C%E5%83%8F%E6%93%8D%E4%BD%9C/">Docker离线环境部署以及镜像导入</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 Joy<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}
